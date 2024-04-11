@@ -1,34 +1,21 @@
-.Container {
-    background-color: cadetblue;
-}
-
 .navbar-size {
-    background-color: rgb(57, 115, 140);
+    width: 95%;
     margin: 0 auto;
 }
-
-.userImageSize {
+.user-image-size {
     height: 56px;
     margin: 4px 0;
 }
-
-.linkedin {
-    padding: 30%;
-    padding-bottom: 40%
+.main-body {
+    background-color: #f28487;
+    color: white;
+    min-height: calc(100vh - 64px);
 }
-
-.mainContainer {
-    color: rgb(7, 28, 92);
-    background-color: rgb(101, 132, 150);
-    height: calc(100vh - 64px);
-}
-
 .materialboxed-image {
     margin: 0 auto;
-    height: 300px;
+    height: 400px;
 }
-
 .click-me-button {
-    background-color: rgb(0, 88, 139);
+    background-color: #EE6E73;
     margin-top: 50px;
 }
