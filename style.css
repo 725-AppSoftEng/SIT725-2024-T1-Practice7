@@ -7,7 +7,7 @@
     margin: 4px 0;
 }
 .main-body {
-    background-color: #f28487;
+    background-color: #dd5952;
     color: white;
     min-height: calc(100vh - 64px);
 }
@@ -16,6 +16,6 @@
     height: 400px;
 }
 .click-me-button {
-    background-color: #EE6E73;
+    background-color: #6e7dee;
     margin-top: 50px;
 }
