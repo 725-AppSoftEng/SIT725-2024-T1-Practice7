@@ -63,8 +63,8 @@ app.post('/api/cats', async (req, res) => {
 
     const catData = req.body;
     await collection.insertOne(catData); 
-    console.log("Dog post successful");
-    res.send("Dog post successful");
+    console.log("Cat post successful");
+    res.send("Cat post successful");
   } catch (err) {
     console.error(err);
     res.status(500).send("Internal Server Error");

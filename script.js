@@ -28,7 +28,7 @@ $(document).ready(function(){
             success: function(response) {
                 console.log(response); 
                 
-                $('#catPostSuccess').text('Dog post successful');
+                $('#catPostSuccess').text('Cat post successful');
             },
             error: function(error) {
                 console.error('Error:', error); 
