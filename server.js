@@ -5,7 +5,7 @@ const uri = "mongodb+srv://manasakavali2001:Snooby@adddatabase.wti0wmc.mongodb.n
 const port = process.env.PORT || 3000;
 let collection;
 
-app.use(express.static(__dirname)); 
+app.use(express.static(__dirname));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -22,7 +22,7 @@ async function runDBConnection() {
     await client.connect();
     collection = client.db().collection('Cat');
     console.log("Database connection established");
-    
+
     // Once the connection is established, start the server
     app.listen(port, () => {
       console.log(`Server is running on port ${port}`);
@@ -36,7 +36,7 @@ runDBConnection();
 
 // Define route handlers after the database connection is established
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html'); 
+  res.sendFile(__dirname + '/index.html');
 });
 
 app.get('/api/cats', async (req, res) => {
@@ -62,7 +62,7 @@ app.post('/api/cats', async (req, res) => {
     }
 
     const catData = req.body;
-    await collection.insertOne(catData); 
+    await collection.insertOne(catData);
     console.log("Cat post successful");
     res.send("Cat post successful");
   } catch (err) {
