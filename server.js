@@ -5,6 +5,22 @@ const uri = "mongodb+srv://manasakavali2001:Snooby@adddatabase.wti0wmc.mongodb.n
 const port = process.env.PORT || 3000;
 let collection;
 
+const { Socket } = require('socket.io');
+let http = require('http').createServer(app);
+let io = require('socket.io')(http);
+
+http.listen(3000, () => { console.log('express server started'); });
+io.on('connection', (socket) => {
+  console.log('client is connected');
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+
+  setInterval(() => {
+    socket.emit('number', parseInt(Math.random() * 10));
+  }, 1000)
+});
+
 app.use(express.static(__dirname));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -69,4 +85,6 @@ app.post('/api/cats', async (req, res) => {
     console.error(err);
     res.status(500).send("Internal Server Error");
   }
+
 });
+

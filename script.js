@@ -1,13 +1,13 @@
-$(document).ready(function(){
- 
+$(document).ready(function () {
+
     $('.modal').modal();
 
-    $('#clickMeButton').click(function() {
+    $('#clickMeButton').click(function () {
         $('#modal1').modal('open');
     });
 
-  
-    $('#formSubmit').click(function() {
+
+    $('#formSubmit').click(function () {
         var firstName = $('#first_name').val();
         var lastName = $('#last_name').val();
         var password = $('#password').val();
@@ -20,21 +20,26 @@ $(document).ready(function(){
             email: email
         };
 
-        
+
         $.ajax({
             type: 'POST',
-            url: '/api/cats', 
+            url: '/api/cats',
             data: formData,
-            success: function(response) {
-                console.log(response); 
-                
+            success: function (response) {
+                console.log(response);
+
                 $('#catPostSuccess').text('Cat post successful');
             },
-            error: function(error) {
-                console.error('Error:', error); 
-               
+            error: function (error) {
+                console.error('Error:', error);
+
             }
         });
         $('#modal1').modal('close');
     });
+    let socket = io();
+    socket.on('number', (msg) => {
+        console.log('Random Number: ' + msg);
+    });
 });
+
