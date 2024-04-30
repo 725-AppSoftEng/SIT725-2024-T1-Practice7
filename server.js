@@ -9,7 +9,11 @@ const { Socket } = require('socket.io');
 let http = require('http').createServer(app);
 let io = require('socket.io')(http);
 
-http.listen(3000, () => { console.log('express server started'); });
+// Listen only on http server
+http.listen(port, () => {
+  console.log(`Server and Socket.io running on port ${port}`);
+});
+
 io.on('connection', (socket) => {
   console.log('client is connected');
   socket.on('disconnect', () => {
@@ -23,7 +27,7 @@ io.on('connection', (socket) => {
 
 app.use(express.static(__dirname));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 
 const client = new MongoClient(uri, {
   serverApi: {
@@ -38,11 +42,6 @@ async function runDBConnection() {
     await client.connect();
     collection = client.db().collection('Cat');
     console.log("Database connection established");
-
-    // Once the connection is established, start the server
-    app.listen(port, () => {
-      console.log(`Server is running on port ${port}`);
-    });
   } catch (ex) {
     console.error(ex);
   }
@@ -57,11 +56,9 @@ app.get('/', (req, res) => {
 
 app.get('/api/cats', async (req, res) => {
   try {
-    // Ensure that the collection is defined before querying it
     if (!collection) {
       throw new Error('Collection is not initialized');
     }
-
     const cats = await collection.find({}).toArray();
     res.json(cats);
   } catch (err) {
@@ -72,11 +69,9 @@ app.get('/api/cats', async (req, res) => {
 
 app.post('/api/cats', async (req, res) => {
   try {
-    // Ensure that the collection is defined before inserting data into it
     if (!collection) {
       throw new Error('Collection is not initialized');
     }
-
     const catData = req.body;
     await collection.insertOne(catData);
     console.log("Cat post successful");
@@ -85,6 +80,5 @@ app.post('/api/cats', async (req, res) => {
     console.error(err);
     res.status(500).send("Internal Server Error");
   }
-
 });
 
